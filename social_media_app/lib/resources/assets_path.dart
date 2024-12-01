@@ -1,8 +1,8 @@
 
-
 class AssetsPath {
 
   static const String _images = 'assets/images';
+
   // Base path for icons
   static const String _icons = 'assets/icons';
 
@@ -56,51 +56,51 @@ class AssetsPath {
 
   //For Images
 
-  static const String image1 = '$_images/image_1.jpg';
-  static const String image2 = '$_images/image_2.jpg';
-  static const String image3 = '$_images/image_3.jpg';
-  static const String image4 = '$_images/image_4.jpg';
-  static const String image5 = '$_images/image_5.jpg';
-  static const String image6 = '$_images/image_6.jpg';
-  static const String image7 = '$_images/image_7.jpg';
-  static const String image8 = '$_images/image_8.jpg';
-  static const String image9 = '$_images/image_9.jpg';
-  static const String image10 = '$_images/image_10.jpg';
-  static const String image11 = '$_images/image_11.jpg';
-  static const String image12 = '$_images/image_12.jpg';
-  static const String image13 = '$_images/image_13.jpg';
-  static const String image14 = '$_images/image_14.jpg';
-  static const String image15 = '$_images/image_15.jpg';
-  static const String image16 = '$_images/image_16.jpg';
-  static const String image17 = '$_images/image_17.jpg';
-  static const String image18 = '$_images/image_18.jpg';
-  static const String image19 = '$_images/image_19.jpg';
-  static const String image20 = '$_images/image_20.jpg';
-  static const String image21 = '$_images/image_21.jpg';
-  static const String image22 = '$_images/image_22.jpg';
-  static const String image23 = '$_images/image_23.jpg';
-  static const String image24 = '$_images/image_24.jpg';
-  static const String image25 = '$_images/image_25.jpg';
-  static const String image26 = '$_images/image_26.jpg';
-  static const String image27 = '$_images/image_27.jpg';
-  static const String image28 = '$_images/image_28.jpg';
-  static const String image29 = '$_images/image_29.jpg';
-  static const String image30 = '$_images/image_30.jpg';
-  static const String image31 = '$_images/image_31.jpg';
-  static const String profileImage1 = '$_images/profile_image_1.jpg';
-  static const String profileImage2 = '$_images/profile_image_2.jpg';
-  static const String profileImage3 = '$_images/profile_image_3.jpg';
-  static const String profileImage4 = '$_images/profile_image_4.jpg';
-  static const String ostadPromo1 = '$_images/ostad_promo_1.jpg';
-  static const String ostadPromo2 = '$_images/ostad_promo_2.jpg';
-  static const String ostadPromo3 = '$_images/ostad_promo_3.jpg';
-  static const String ostadPromo4 = '$_images/ostad_promo_4.jpg';
-  static const String ostadPromo5 = '$_images/ostad_promo_5.jpg';
-  static const String ostadPromo6 = '$_images/ostad_promo_6.jpg';
+  static const String image1 = '$_images/image_1.png';
+  static const String image2 = '$_images/image_2.png';
+  static const String image3 = '$_images/image_3.png';
+  static const String image4 = '$_images/image_4.png';
+  static const String image5 = '$_images/image_5.png';
+  static const String image6 = '$_images/image_6.png';
+  static const String image7 = '$_images/image_7.png';
+  static const String image8 = '$_images/image_8.png';
+  static const String image9 = '$_images/image_9.png';
+  static const String image10 = '$_images/image_10.png';
+  static const String image11 = '$_images/image_11.png';
+  static const String image12 = '$_images/image_12.png';
+  static const String image13 = '$_images/image_13.png';
+  static const String image14 = '$_images/image_14.png';
+  static const String image15 = '$_images/image_15.png';
+  static const String image16 = '$_images/image_16.png';
+  static const String image17 = '$_images/image_17.png';
+  static const String image18 = '$_images/image_18.png';
+  static const String image19 = '$_images/image_19.png';
+  static const String image20 = '$_images/image_20.png';
+  static const String image21 = '$_images/image_21.png';
+  static const String image22 = '$_images/image_22.png';
+  static const String image23 = '$_images/image_23.png';
+  static const String image24 = '$_images/image_24.png';
+  static const String image25 = '$_images/image_25.png';
+  static const String image26 = '$_images/image_26.png';
+  static const String image27 = '$_images/image_27.png';
+  static const String image28 = '$_images/image_28.png';
+  static const String image29 = '$_images/image_29.png';
+  static const String image30 = '$_images/image_30.png';
+  static const String image31 = '$_images/image_31.png';
+  static const String profileImage1 = '$_images/profile_image_1.png';
+  static const String profileImage2 = '$_images/profile_image_2.png';
+  static const String profileImage3 = '$_images/profile_image_3.png';
+  static const String profileImage4 = '$_images/profile_image_4.png';
+  static const String ostadPromo1 = '$_images/ostad_promo_1.png';
+  static const String ostadPromo2 = '$_images/ostad_promo_2.png';
+  static const String ostadPromo3 = '$_images/ostad_promo_3.png';
+  static const String ostadPromo4 = '$_images/ostad_promo_4.png';
+  static const String ostadPromo5 = '$_images/ostad_promo_5.png';
+  static const String ostadPromo6 = '$_images/ostad_promo_6.png';
 
 
   static String getImagePath(int index) {
     return '$_images/image_${index + 1}.png';
   }
-}
 
+}

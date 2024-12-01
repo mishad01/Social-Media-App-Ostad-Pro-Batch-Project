@@ -102,8 +102,4 @@ class AssetsPath {
   static String getImagePath(int index) {
     return '$_images/image_${index + 1}.png';
   }
-
 }
-
-
-

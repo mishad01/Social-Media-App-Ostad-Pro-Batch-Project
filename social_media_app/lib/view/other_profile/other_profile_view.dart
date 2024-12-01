@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:social_media_app/resources/assets_path.dart';
 import 'package:social_media_app/view/other_profile/widgets/rich_text_profile.dart';
 
 class OtherProfileView extends StatefulWidget {
@@ -13,13 +14,16 @@ class OtherProfileView extends StatefulWidget {
 
 class _OtherProfileViewState extends State<OtherProfileView> {
   List<String> imageSet = [
-    'assets/icons/1.jpg',
-    'assets/icons/3.jpg',
-    'assets/icons/4.jpg',
-    'assets/icons/5.png',
-    'assets/icons/6.jpg',
-    'assets/icons/7.jpg',
-    'assets/icons/8.jpg',
+    AssetsPath.ostadPromo1,
+    AssetsPath.ostadPromo2,
+    AssetsPath.ostadPromo3,
+    AssetsPath.image7,
+    AssetsPath.image8,
+    AssetsPath.image5,
+    AssetsPath.image4,
+    AssetsPath.ostadPromo4,
+    AssetsPath.ostadPromo5,
+    AssetsPath.ostadPromo6,
   ];
   @override
   Widget build(BuildContext context) {
@@ -158,12 +162,15 @@ class _OtherProfileViewState extends State<OtherProfileView> {
                         Center(
                           child: MasonryGridView.builder(
                             gridDelegate:
-                                const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                                SliverSimpleGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                             ),
                             itemBuilder: (context, index) => Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(imageSet[index]),
+                              child: Image.asset(
+                                imageSet[index],
+                                fit: BoxFit.contain,
+                              ),
                             ),
                             itemCount: imageSet.length,
                           ),
@@ -172,7 +179,13 @@ class _OtherProfileViewState extends State<OtherProfileView> {
                             child: ListView.builder(
                           itemCount: imageSet.length,
                           itemBuilder: (context, index) {
-                            return Image.asset(imageSet[index]);
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                imageSet[index],
+                                fit: BoxFit.contain,
+                              ),
+                            );
                           },
                         )),
                       ],

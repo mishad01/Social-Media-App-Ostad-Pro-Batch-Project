@@ -10,8 +10,13 @@ class SocialMediaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (p0, p1, p2) {
-        return GetMaterialApp(home: HomeView());
+        return GetMaterialApp(
+          home: HomeView(),
+          theme: buildThemeData(),
+        );
       },
     );
   }
+
+  ThemeData buildThemeData() => ThemeData(fontFamily: 'Satoshi');
 }

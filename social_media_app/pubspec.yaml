@@ -84,9 +84,9 @@ flutter:
   fonts:
      - family: Satoshi
        fonts:
-         - asset: fonts/Satoshi-Regular.otf
-         - asset: fonts/Satoshi-Bold.otf
-         - asset: fonts/Satoshi-Medium.otf
+         - asset: assets/fonts/Satoshi-Regular.otf
+         - asset: assets/fonts/Satoshi-Bold.otf
+         - asset: assets/fonts/Satoshi-Medium.otf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

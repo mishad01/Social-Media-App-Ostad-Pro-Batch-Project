@@ -97,13 +97,8 @@ class AssetsPath {
   static const String ostadPromo4 = '$_images/ostad_promo_4.png';
   static const String ostadPromo5 = '$_images/ostad_promo_5.png';
   static const String ostadPromo6 = '$_images/ostad_promo_6.png';
-
-
   static String getImagePath(int index) {
     return '$_images/image_${index + 1}.png';
   }
 
 }
-
-
-

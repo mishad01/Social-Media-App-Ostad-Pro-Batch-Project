@@ -21,4 +21,6 @@ Here’s what we’ll be using for this project:<br>
 - Backend: Firebase<br>
 - Tools: JIRA, GitHub<br>
 
-![image](https://github.com/user-attachments/assets/c575e21f-8192-414e-a6d4-619c2ccc952e)
+
+![image](https://github.com/user-attachments/assets/d72359ac-14a9-453d-8754-1dae13487dad)
+

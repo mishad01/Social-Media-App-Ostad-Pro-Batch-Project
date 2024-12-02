@@ -31,7 +31,7 @@ class _LoginViewState extends State<LoginView> {
             children: [
               const SizedBox(height: 130),
               const Text(
-                'Enter your phone number and password',
+                'Inter your phone number and password',
                 style: TextStyle(
                   color: Color(0xff101828),
                   fontSize: 24,

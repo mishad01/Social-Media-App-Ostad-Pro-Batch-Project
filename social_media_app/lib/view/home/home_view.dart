@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:social_media_app/resources/assets_path.dart';
+import 'package:social_media_app/utils/utils.dart';
 import 'package:social_media_app/view/home/widgets/home_story_section.dart';
 import 'package:social_media_app/view/home/widgets/post_view_section.dart';
 
@@ -26,14 +27,26 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: ElevatedButton(
+          onPressed: () {
+            return Utils.alertShowDialogue();
+          },
+          style: ElevatedButton.styleFrom(
+              minimumSize: Size(100, 100), backgroundColor: Colors.greenAccent),
+          child: Icon(Icons.add)),
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Image.network(
-              'https://randomuser.me/api/portraits/men/1.jpg',
-              fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: () {
+              Utils.updateShowDialogue();
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.network(
+                'https://randomuser.me/api/portraits/men/1.jpg',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

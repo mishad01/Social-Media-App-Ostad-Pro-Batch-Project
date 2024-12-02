@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:social_media_app/resources/assets_path.dart';
+import 'package:social_media_app/utils/utils.dart';
 
 class PostViewSection extends StatelessWidget {
   const PostViewSection({
@@ -96,7 +97,12 @@ class PostViewSection extends StatelessWidget {
                   AssetsPath.commentIcon,
                 ),
                 SizedBox(width: 3.w),
-                Text("20 Comments"),
+                GestureDetector(
+                  onTap: () {
+                    Utils.showCommentBottomSheet();
+                  },
+                  child: Text("20 Comments"),
+                ),
                 Spacer(),
                 Padding(
                   padding: EdgeInsets.only(right: 2.w),

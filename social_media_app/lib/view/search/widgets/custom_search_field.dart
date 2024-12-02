@@ -15,7 +15,8 @@ class CustomSearchField extends StatelessWidget {
         child: TextFormField(
           decoration: InputDecoration(
             labelText: 'Search',
-            labelStyle: TextStyle(color: Color(0xff98A2B3)), // Fixed property name
+            labelStyle:
+                TextStyle(color: Color(0xff98A2B3)), // Fixed property name
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(

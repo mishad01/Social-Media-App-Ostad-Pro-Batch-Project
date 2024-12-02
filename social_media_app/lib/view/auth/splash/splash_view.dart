@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-
+import 'package:social_media_app/resources/export.dart';
+import 'package:social_media_app/view/auth/login/login_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -12,61 +12,68 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-
           children: [
-            Text('Socialive',style: TextStyle(
-              fontSize: 24, // Appropriate size for text
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.italic,// Semi-bold
-              color: Color(0xff101828), // Text color
-            ),),
-            SizedBox(height: 20,),
+            Text(
+              'SociaLive',
+              style: GoogleFonts.lobster(
+                fontSize: 30,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            SizedBox(
+              height: 6.h,
+            ),
             ElevatedButton(
               onPressed: () {
-                // Add your functionality here
                 print("Create Account tapped");
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff4478FF), // Exact color from your screenshot
-                minimumSize: Size(345, 36), // Width: 200, Height: 50
+                backgroundColor: Color(0xff4478FF),
+                minimumSize: Size(295, 42),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4), // Rounded corners
+                  borderRadius: BorderRadius.circular(4),
                 ),
-                elevation: 2, // Slight shadow for depth
+                elevation: 2,
               ),
-              child: Text(
+              child: const Text(
                 'Create Account',
                 style: TextStyle(
-                  fontSize: 16, // Appropriate size for text
+                  fontSize: 16,
                   fontWeight: FontWeight.w600, // Semi-bold
                   color: Colors.white, // Text color
                 ),
               ),
             ),
-
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 3.h,
+            ),
             GestureDetector(
-              onTap: (){},
-              child: RichText(text: TextSpan(
-                text: 'Log In',style: TextStyle(
-               color: Color(0xff4478FF),
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                
+              onTap: () {
+                Get.to(() => LoginView());
+              },
+              child: RichText(
+                text: const TextSpan(
+                  text: 'Log In',
+                  style: TextStyle(
+                    color: AppColors.themeColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  children: [
+                    WidgetSpan(
+                      child: Icon(
+                        Icons.keyboard_arrow_down,
+                        size: 22,
+                        color: AppColors.themeColor,
+                      ),
+                    )
+                  ],
+                ),
               ),
-                children:[ WidgetSpan(
-                  child: Icon(Icons.keyboard_arrow_down,
-                  size: 20,color:Color(0xff4478FF) ,)
-                )]
-              
-              
-              )),
             )
-
-
           ],
         ),
       ),

@@ -1,6 +1,4 @@
-
 class AssetsPath {
-
   static const String _images = 'assets/images';
 
   // Base path for icons
@@ -37,7 +35,8 @@ class AssetsPath {
   static const String lockIcon = '$_icons/lock.svg';
   static const String loveFillIcon = '$_icons/love_fill.svg';
   static const String loveLineIcon = '$_icons/love_line.svg';
-  static const String messageIcon = '$_icons/mesage.svg'; // Typo in 'message' in the filename
+  static const String messageIcon =
+      '$_icons/mesage.svg'; // Typo in 'message' in the filename
   static const String notificationIcon = '$_icons/notification.svg';
   static const String notifyIcon = '$_icons/notify_icon.svg';
   static const String ostadIcon = '$_icons/ostad_Icon.svg';
@@ -50,9 +49,8 @@ class AssetsPath {
   static const String searchIcon = '$_icons/search.svg';
   static const String sendIcon = '$_icons/send.svg';
   static const String shopIcon = '$_icons/shop.svg';
-  static const String userIcon = '$_icons/user_icon.svg';
+  static const String userIcon = '$_icons/user_icon.png';
   static const String videoIcon = '$_icons/video.svg';
-
 
   //For Images
 
@@ -100,5 +98,4 @@ class AssetsPath {
   static String getImagePath(int index) {
     return '$_images/image_${index + 1}.png';
   }
-
 }

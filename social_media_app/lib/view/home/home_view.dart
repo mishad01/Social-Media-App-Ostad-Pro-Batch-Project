@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:social_media_app/resources/assets_path.dart';
 import 'package:social_media_app/utils/utils.dart';
 import 'package:social_media_app/view/home/widgets/home_story_section.dart';
 import 'package:social_media_app/view/home/widgets/post_view_section.dart';
+import 'package:social_media_app/view/notification/notification_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -27,13 +29,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: ElevatedButton(
-          onPressed: () {
-            return Utils.alertShowDialogue();
-          },
-          style: ElevatedButton.styleFrom(
-              minimumSize: Size(100, 100), backgroundColor: Colors.greenAccent),
-          child: Icon(Icons.add)),
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -56,10 +51,15 @@ class _HomeViewState extends State<HomeView> {
                   fontWeight: FontWeight.bold, fontSize: 25)),
         ),
         actions: [
-          SvgPicture.asset(
-            AssetsPath.notificationIcon,
-            width: 24,
-            height: 24,
+          InkWell(
+            onTap: () {
+              Get.to(() => NotificationView());
+            },
+            child: SvgPicture.asset(
+              AssetsPath.notificationIcon,
+              width: 24,
+              height: 24,
+            ),
           ),
           SizedBox(
             width: 2.w,

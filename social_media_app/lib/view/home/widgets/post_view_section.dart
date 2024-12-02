@@ -93,8 +93,13 @@ class PostViewSection extends StatelessWidget {
                   color: Colors.red,
                 ),
                 SizedBox(width: 2.w),
-                SvgPicture.asset(
-                  AssetsPath.commentIcon,
+                InkWell(
+                  onTap: () {
+                    Utils.showCommentBottomSheet();
+                  },
+                  child: SvgPicture.asset(
+                    AssetsPath.commentIcon,
+                  ),
                 ),
                 SizedBox(width: 3.w),
                 GestureDetector(

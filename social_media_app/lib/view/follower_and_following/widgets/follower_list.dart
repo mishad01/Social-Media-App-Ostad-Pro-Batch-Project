@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:social_media_app/resources/export.dart';
 
 class FollowersList extends StatelessWidget {
   const FollowersList({
@@ -56,14 +55,16 @@ class FollowersList extends StatelessWidget {
                         ),
                         Spacer(),
                         FilledButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Utils.unfollowBottomSheet();
+                          },
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(59, 30),
                               backgroundColor: Color(0xff6993FF),
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(5)))),
-                          child: Text('Follow',
+                          child: Text('Remove',
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white)),
                         ),

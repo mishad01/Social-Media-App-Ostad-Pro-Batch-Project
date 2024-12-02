@@ -14,13 +14,15 @@ class Utils {
 
   static void updateShowDialogue() {
     Get.defaultDialog(
+      backgroundColor: Colors.white,
+      title: "",
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
             child: Container(
               width: 300,
-              height: 240,
+              height: 220,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -29,17 +31,14 @@ class Utils {
                   width: 224,
                   child: Column(
                     children: [
-                      Icon(
-                        Icons.person,
-                        size: 60,
-                      ),
-                      Text(
+                      Image.asset(AssetsPath.userIcon),
+                      const Text(
                         "Profile Created",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       SizedBox(height: 1.h),
-                      Text(
+                      const Text(
                         "update your name, profile image, additional number",
                         style: TextStyle(color: Colors.black),
                         textAlign: TextAlign.center,
@@ -53,7 +52,7 @@ class Utils {
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4))),
-                        child: Text(
+                        child: const Text(
                           "Update",
                           style: TextStyle(fontSize: 14),
                         ),
@@ -65,7 +64,7 @@ class Utils {
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4))),
-                        child: Text(
+                        child: const Text(
                           "Skip",
                           style: TextStyle(color: Color(0xff4478FF)),
                         ),
@@ -82,158 +81,163 @@ class Utils {
   }
 
   static void showCommentBottomSheet() {
-    Get.bottomSheet(Container(
-      height: 438,
-      child: ListView(
-        children: [
-          Center(
-            child: Container(
-              height: 438,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
-                  ),
-                  color: Colors.white),
-              child: Column(
-                children: [
-                  SizedBox(height: 3.w),
-                  Text(
-                    "Comment",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                  ),
-                  SizedBox(height: 1.w),
-                  Divider(
-                    color: Colors.grey.shade300,
-                  ),
-                  //ListView
-                  SizedBox(
-                    height: 300,
-                    child: ListView.builder(
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 2.5.w),
-                                    child: Center(
-                                      child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          child: Image.network(
-                                            'https://randomuser.me/api/portraits/men/1.jpg',
-                                            fit: BoxFit.cover,
+    Get.bottomSheet(
+      backgroundColor: Colors.white,
+      Container(
+        height: 438,
+        child: ListView(
+          children: [
+            Center(
+              child: Container(
+                height: 438,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      topRight: Radius.circular(8),
+                    ),
+                    color: Colors.white),
+                child: Column(
+                  children: [
+                    SizedBox(height: 3.w),
+                    Text(
+                      "Comment",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    ),
+                    SizedBox(height: 1.w),
+                    Divider(
+                      color: Colors.grey.shade300,
+                    ),
+                    //ListView
+                    SizedBox(
+                      height: 300,
+                      child: ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return Center(
+                            child: Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 2.5.w),
+                                      child: Center(
+                                        child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            child: Image.network(
+                                              'https://randomuser.me/api/portraits/men/1.jpg',
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(width: 3.w),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Kathryn Annee",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
+                                    SizedBox(width: 3.w),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Kathryn Annee",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
+                                            SizedBox(width: 2.w),
+                                            Text(
+                                              "2 hours ago",
+                                              style: TextStyle(
+                                                  fontSize: 12.0,
+                                                  color: Colors.grey),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          width: 240,
+                                          child: Text(
+                                            "Nice picture you have captured 🔥 ",
+                                            style: TextStyle(fontSize: 14.0),
                                           ),
-                                          SizedBox(width: 2.w),
-                                          Text(
-                                            "2 hours ago",
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {},
+                                          child: Text(
+                                            "Replay",
                                             style: TextStyle(
-                                                fontSize: 12.0,
-                                                color: Colors.grey),
+                                                fontWeight: FontWeight.w500),
                                           ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 240,
-                                        child: Text(
-                                          "Nice picture you have captured 🔥 ",
-                                          style: TextStyle(fontSize: 14.0),
                                         ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {},
-                                        child: Text(
-                                          "Replay",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 3.w),
-                                    child: SvgPicture.asset(
-                                        AssetsPath.loveLineIcon),
-                                  )
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.grey.shade300,
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      height: 50,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 30,
-                            width: 30,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
-                              child: Image.network(
-                                'https://randomuser.me/api/portraits/men/1.jpg',
-                                fit: BoxFit.cover,
-                              ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 3.w),
+                                      child: SvgPicture.asset(
+                                          AssetsPath.loveLineIcon),
+                                    )
+                                  ],
+                                ),
+                                Divider(
+                                  color: Colors.grey.shade300,
+                                )
+                              ],
                             ),
-                          ),
-                          SizedBox(width: 2.w),
-                          Expanded(
-                            child: TextFormField(
-                              decoration:
-                                  InputDecoration(hintText: "Add Comment"),
-                            ),
-                          ),
-                          Text("Post",
-                              style: TextStyle(color: Color(0xffb4478FF))),
-                        ],
+                          );
+                        },
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        height: 50,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 30,
+                              width: 30,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: Image.network(
+                                  'https://randomuser.me/api/portraits/men/1.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 2.w),
+                            Expanded(
+                              child: TextFormField(
+                                decoration:
+                                    InputDecoration(hintText: "Add Comment"),
+                              ),
+                            ),
+                            Text("Post",
+                                style: TextStyle(color: Color(0xffb4478FF))),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   static void alertShowDialogue() {
     Get.defaultDialog(
+      backgroundColor: Colors.white,
       title: "",
       content: Column(
         children: [
@@ -309,10 +313,11 @@ class Utils {
 
   static void selectCameraOrGalleryShowDialogue() {
     Get.defaultDialog(
+      backgroundColor: Colors.white,
       title: "",
       content: Container(
-        width: 256,
-        height: 190,
+        width: 300,
+        height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Colors.white,
@@ -425,5 +430,21 @@ class Utils {
         ),
       ),
     ));
+  }
+
+  static Widget appBarIcon() {
+    return GestureDetector(
+      onTap: Get.back,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: SvgPicture.asset(
+            AssetsPath.leftArrowIcon,
+            width: 30,
+            height: 30,
+          ),
+        ),
+      ),
+    );
   }
 }

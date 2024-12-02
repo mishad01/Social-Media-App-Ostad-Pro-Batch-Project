@@ -25,11 +25,11 @@ class _FollowerAndFollowingViewState extends State<FollowerAndFollowingView> {
           children: [
             Row(
               children: [
-                _buildTabItem("Followers", 0),
+                _buildTabItem("Following", 1),
                 SizedBox(
                   width: 2.w,
                 ),
-                _buildTabItem("Following", 1),
+                _buildTabItem("Follower", 0),
               ],
             ),
             Divider(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_app/view/search/widgets/custom_search_field.dart';
 
-
 class AssetsPath {
   static String getImagePath(int index) {
     return 'assets/images/image_${index + 1}.png'; // Adjust the path to your assets
@@ -19,21 +18,20 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const CustomSearchField(), // Ensure CustomSearchField widget exists
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: GridView.builder(
-                padding: const EdgeInsets.all(8.0), // Padding for the entire grid
+      body: SafeArea(
+        child: Column(
+          children: [
+            CustomSearchField(),
+            Expanded(
+              child: GridView.builder(
+                padding: const EdgeInsets.all(8.0),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of items per row
+                  crossAxisCount: 2,
                 ),
                 itemBuilder: (context, index) {
-                  String imagePath = AssetsPath.getImagePath(index); // Get dynamic image path
+                  String imagePath = AssetsPath.getImagePath(index);
                   return Padding(
-                    padding: const EdgeInsets.all(8.0), // Padding for each item inside the grid
+                    padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
                       imagePath,
                       fit: BoxFit.cover,
@@ -42,9 +40,9 @@ class _SearchViewState extends State<SearchView> {
                 },
                 itemCount: 10,
               ),
-          ),
-
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

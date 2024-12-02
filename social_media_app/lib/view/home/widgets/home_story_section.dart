@@ -24,12 +24,12 @@ class HomeStorySection extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Card(
+            color: Colors.white,
             child: Container(
               width: 120,
               height: 154,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
-                border: Border.all(color: Colors.grey.shade300),
               ),
               child: Column(
                 children: [

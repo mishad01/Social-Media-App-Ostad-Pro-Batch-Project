@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:social_media_app/resources/app_colors.dart';
-import 'package:social_media_app/view/home/widgets/main_bottom_navigation_bar.dart';
+import 'package:social_media_app/view/auth/splash/splash_view.dart';
 
 class SocialMediaApp extends StatelessWidget {
   const SocialMediaApp({super.key});
@@ -12,7 +12,7 @@ class SocialMediaApp extends StatelessWidget {
     return Sizer(
       builder: (p0, p1, p2) {
         return GetMaterialApp(
-          home: MainBottomNavigationBar(),
+          home: SplashView(),
           theme: buildThemeData(),
         );
       },

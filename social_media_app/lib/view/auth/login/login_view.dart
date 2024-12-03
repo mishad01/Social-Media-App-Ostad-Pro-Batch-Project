@@ -1,6 +1,6 @@
 import 'package:social_media_app/resources/export.dart';
 import 'package:social_media_app/view/auth/login/widgets/custom_text_field.dart';
-import 'package:social_media_app/view/home/home_view.dart';
+import 'package:social_media_app/view/home/widgets/main_bottom_navigation_bar.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -65,7 +65,7 @@ class _LoginViewState extends State<LoginView> {
                     SizedBox(height: 2.h),
                     ElevatedButton(
                       onPressed: () {
-                        Get.offAll(() => HomeView());
+                        Get.offAll(() => MainBottomNavigationBar());
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.themeColor,

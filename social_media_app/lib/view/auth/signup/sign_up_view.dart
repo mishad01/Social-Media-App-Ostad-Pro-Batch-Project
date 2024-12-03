@@ -1,14 +1,14 @@
 import 'package:social_media_app/resources/export.dart';
 import 'package:social_media_app/view/auth/login/widgets/custom_text_field.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignUpViewState extends State<SignUpView> {
   final _emailTEController = TextEditingController();
   final _passwordTEController = TextEditingController();
   final _formState = GlobalKey<FormState>();
@@ -33,11 +33,11 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     children: [
                       const Text(
-                        'Inter your phone number and password',
+                        'Create Account',
                         style: TextStyle(
-                          color: Color(0xff101828),
-                          fontSize: 24,
-                        ),
+                            color: Colors.black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 3.h),
                       CustomTextField(
@@ -60,7 +60,7 @@ class _LoginViewState extends State<LoginView> {
                       SizedBox(height: 2.h),
                       CustomTextField(
                         prefixImg: AssetsPath.lockIcon,
-                        suffixImg: AssetsPath.eyeIcon,
+                        suffixImg: null,
                         hintText: "Password",
                         hintTextDetails: "Input Password",
                         controller: _passwordTEController,
@@ -75,20 +75,23 @@ class _LoginViewState extends State<LoginView> {
                         },
                       ),
                       SizedBox(height: 2.h),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.check_box_outline_blank,
-                            color: Colors.black,
-                          ),
-                          SizedBox(width: 2.w),
-                          const Text(
-                            'Save password',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ],
+                      CustomTextField(
+                        prefixImg: AssetsPath.lockIcon,
+                        suffixImg: null,
+                        hintText: "Confirm Password",
+                        hintTextDetails: "Confirm Password",
+                        controller: _passwordTEController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          if (value.length < 6) {
+                            return 'Password must be at least 6 characters long';
+                          }
+                          return null;
+                        },
                       ),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: 4.h),
                       ElevatedButton(
                         onPressed: () {
                           if (_formState.currentState!.validate()) {
@@ -106,7 +109,7 @@ class _LoginViewState extends State<LoginView> {
                           elevation: 2,
                         ),
                         child: const Text(
-                          'Log In',
+                          'Sign Up',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,

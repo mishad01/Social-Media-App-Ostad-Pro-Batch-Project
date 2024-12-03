@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:sizer/sizer.dart';
-import 'package:social_media_app/resources/assets_path.dart';
-import 'package:social_media_app/utils/utils.dart';
+import 'package:social_media_app/resources/export.dart';
 import 'package:social_media_app/view/home/widgets/home_story_section.dart';
 import 'package:social_media_app/view/home/widgets/post_view_section.dart';
 import 'package:social_media_app/view/notification/notification_view.dart';
@@ -76,16 +70,23 @@ class _HomeViewState extends State<HomeView> {
           children: [
             HomeStorySection(),
             SizedBox(height: 2.h),
-            ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: postImg.length,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return PostViewSection(
-                  img: postImg[index],
-                );
-              },
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: postImg.length,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      PostViewSection(
+                        img: postImg[index],
+                      ),
+                      SizedBox(height: 1.h),
+                    ],
+                  );
+                },
+              ),
             )
           ],
         ),

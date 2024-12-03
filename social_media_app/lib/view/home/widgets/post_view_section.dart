@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sizer/sizer.dart';
-import 'package:social_media_app/resources/assets_path.dart';
-import 'package:social_media_app/utils/utils.dart';
+import 'package:social_media_app/resources/export.dart';
 
 class PostViewSection extends StatelessWidget {
   const PostViewSection({
@@ -13,14 +9,16 @@ class PostViewSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.h,
-      width: 95.w,
-      color: Colors.white,
+      height: 55.h,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12), color: Colors.white),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 1.h),
           Row(
             children: [
+              //Image
               Padding(
                 padding: EdgeInsets.only(left: 2.5.w),
                 child: Container(
@@ -52,13 +50,13 @@ class PostViewSection extends StatelessWidget {
                     "Kathryn Annee",
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 17.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     "@anny2002",
-                    style: TextStyle(fontSize: 14.0),
+                    style: TextStyle(fontSize: 15.sp),
                   ),
                 ],
               ),
@@ -69,11 +67,11 @@ class PostViewSection extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: 2.h),
           Center(
             child: Container(
               width: 90.0.w,
-              height: 400,
+              height: 40.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -83,7 +81,7 @@ class PostViewSection extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: 2.h),
           Padding(
             padding: EdgeInsets.only(left: 2.5.w),
             child: Row(
@@ -119,8 +117,6 @@ class PostViewSection extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 1.5.h),
-          Divider(),
         ],
       ),
     );

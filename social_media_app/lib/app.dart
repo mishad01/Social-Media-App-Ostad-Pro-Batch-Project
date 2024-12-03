@@ -31,7 +31,7 @@ class SocialMediaApp extends StatelessWidget {
               color: AppColors.grayColor.withOpacity(0.5),
             ),
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(
               width: 1,

@@ -1,5 +1,6 @@
 import 'package:social_media_app/resources/export.dart';
 import 'package:social_media_app/view/auth/login/login_view.dart';
+import 'package:social_media_app/view/auth/signup/sign_up_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -28,7 +29,7 @@ class _SplashViewState extends State<SplashView> {
             ),
             ElevatedButton(
               onPressed: () {
-                print("Create Account tapped");
+                Get.to(() => SignUpView());
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xff4478FF),

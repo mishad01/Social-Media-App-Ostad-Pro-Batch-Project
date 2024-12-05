@@ -1,5 +1,8 @@
 import 'package:social_media_app/resources/export.dart';
 import 'package:social_media_app/view/auth/login/widgets/custom_text_field.dart';
+import 'package:get/get.dart';
+
+import '../../../view_model/auth/login_controller.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -12,6 +15,7 @@ class _LoginViewState extends State<LoginView> {
   final _emailTEController = TextEditingController();
   final _passwordTEController = TextEditingController();
   final _formState = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +37,7 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     children: [
                       const Text(
-                        'Inter your phone number and password',
+                        'Enter your email and password',
                         style: TextStyle(
                           color: Color(0xff101828),
                           fontSize: 24,
@@ -89,30 +93,49 @@ class _LoginViewState extends State<LoginView> {
                         ],
                       ),
                       SizedBox(height: 2.h),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formState.currentState!.validate()) {
-                            // Process valid data
-                            print("Email: ${_emailTEController.text}");
-                            print("Password: ${_passwordTEController.text}");
-                          }
+                      GetBuilder<LoginController>(
+                        builder: (loginController) {
+                          return Visibility(
+                            visible:
+                                loginController.signInApiInProgress == false,
+                            replacement:
+                                Center(child: CircularProgressIndicator()),
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formState.currentState!.validate()) {
+                                  bool success = await loginController.signIn(
+                                      _emailTEController.text,
+                                      _passwordTEController.text);
+                                  if (success) {
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content:
+                                            Text(loginController.errorMessage),
+                                      ),
+                                    );
+                                  }
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.themeColor,
+                                minimumSize: const Size.fromHeight(36),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                elevation: 2,
+                              ),
+                              child: const Text(
+                                'Log In',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          );
                         },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.themeColor,
-                          minimumSize: const Size.fromHeight(36),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          elevation: 2,
-                        ),
-                        child: const Text(
-                          'Log In',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -127,7 +150,6 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailTEController.dispose();
     _passwordTEController.dispose();

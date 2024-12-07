@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:social_media_app/resources/assets_path.dart';
 import 'package:social_media_app/view/other_profile/widgets/follow_and_message_button.dart';
@@ -15,7 +15,7 @@ class OtherProfileView extends StatefulWidget {
 }
 
 class _OtherProfileViewState extends State<OtherProfileView> {
-  List<String> imageSet = [
+  final List<String> imageSet = [
     AssetsPath.ostadPromo1,
     AssetsPath.ostadPromo2,
     AssetsPath.ostadPromo3,
@@ -27,19 +27,26 @@ class _OtherProfileViewState extends State<OtherProfileView> {
     AssetsPath.ostadPromo5,
     AssetsPath.ostadPromo6,
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
         title: Text(
           "Ostad App",
-          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.bold,
+              color: Colors.black),
         ),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: ListView(
         children: [
-          ProfileDetailsSection(),
+          const ProfileDetailsSection(),
           SizedBox(height: 1.h),
           ItemViewSection(imageSet: imageSet),
         ],
@@ -49,86 +56,85 @@ class _OtherProfileViewState extends State<OtherProfileView> {
 }
 
 class ProfileDetailsSection extends StatelessWidget {
-  const ProfileDetailsSection({
-    super.key,
-  });
+  const ProfileDetailsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 115,
+      height: 13.h,
       color: Colors.white,
-      child: Center(
-        child: Container(
-          height: 85,
-          width: 383,
-          child: Row(
-            children: [
-              Container(
-                height: 80,
-                width: 80,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.network(
-                    'https://randomuser.me/api/portraits/men/1.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                ),
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
+      child: Row(
+        children: [
+          Container(
+            height: 12.h,
+            width: 12.h,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: const DecorationImage(
+                image: NetworkImage(
+                    'https://randomuser.me/api/portraits/men/1.jpg'),
+                fit: BoxFit.cover,
               ),
-              SizedBox(width: 4.w),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      RichTextProfile(num: '59', text: 'Post'),
-                      SizedBox(width: 5.w),
-                      RichTextProfile(num: '125', text: 'Following'),
-                      SizedBox(width: 5.w),
-                      RichTextProfile(num: '850', text: 'Follower'),
-                    ],
-                  ),
-                  SizedBox(height: 0.3.h),
-                  Text('Visit : www.ostad.app'),
-                  FollowAndMessageButton()
-                ],
-              )
-            ],
+            ),
           ),
-        ),
+          SizedBox(width: 5.w),
+          // Profile Info
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    RichTextProfile(num: '59', text: 'Posts'),
+                    RichTextProfile(num: '125', text: 'Following'),
+                    RichTextProfile(num: '850', text: 'Followers'),
+                  ],
+                ),
+                SizedBox(height: 1.h),
+                Text(
+                  'Visit: www.ostad.app',
+                  style: TextStyle(fontSize: 10.sp, color: Colors.black),
+                ),
+                SizedBox(height: 1.h),
+                const FollowAndMessageButton(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
 class ItemViewSection extends StatelessWidget {
-  const ItemViewSection({
-    super.key,
-    required this.imageSet,
-  });
-
   final List<String> imageSet;
+
+  const ItemViewSection({super.key, required this.imageSet});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 700,
-      width: 200, // Adjust width to fit the tabs
       color: Colors.white,
+      height: 70.h,
       child: DefaultTabController(
-        length: 2,
-        // Number of tabs
+        length: 2, // Number of tabs
         child: Column(
           children: [
+            // TabBar
             TabBar(
               tabs: [
                 Tab(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset('assets/icons/grid.svg'),
-                      SizedBox(width: 1.w),
-                      Text("Grid view"),
+                      SvgPicture.asset(AssetsPath.gridIcon),
+                      SizedBox(width: 2.w),
+                      Text("Grid View",
+                          style:
+                              TextStyle(fontSize: 10.sp, color: Colors.black)),
                     ],
                   ),
                 ),
@@ -136,9 +142,11 @@ class ItemViewSection extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset('assets/icons/list.svg'),
-                      SizedBox(width: 1.w),
-                      Text("List view"),
+                      SvgPicture.asset(AssetsPath.listIcon),
+                      SizedBox(width: 2.w),
+                      Text("List View",
+                          style:
+                              TextStyle(fontSize: 10.sp, color: Colors.black)),
                     ],
                   ),
                 ),
@@ -148,6 +156,7 @@ class ItemViewSection extends StatelessWidget {
                 insets: EdgeInsets.symmetric(horizontal: 30),
               ),
             ),
+            // TabBarView
             Expanded(
               child: TabBarView(
                 children: [
@@ -155,7 +164,7 @@ class ItemViewSection extends StatelessWidget {
                   ListViewItems(imageSet: imageSet),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

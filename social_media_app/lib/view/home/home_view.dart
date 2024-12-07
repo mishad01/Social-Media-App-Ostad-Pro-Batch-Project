@@ -1,4 +1,6 @@
+import 'package:social_media_app/data/services/firebase_auth_services.dart';
 import 'package:social_media_app/resources/export.dart';
+import 'package:social_media_app/view/auth/login/login_view.dart';
 import 'package:social_media_app/view/home/widgets/home_story_section.dart';
 import 'package:social_media_app/view/home/widgets/post_view_section.dart';
 import 'package:social_media_app/view/notification/notification_view.dart';
@@ -62,6 +64,12 @@ class _HomeViewState extends State<HomeView> {
             padding: const EdgeInsets.only(right: 10),
             child: SvgPicture.asset(AssetsPath.messageIcon),
           ),
+          IconButton(
+              onPressed: () async {
+                await FirebaseAuthServices.auth.signOut();
+                Get.offAll(LoginView());
+              },
+              icon: Icon(Icons.logout))
         ],
       ),
       body: Padding(

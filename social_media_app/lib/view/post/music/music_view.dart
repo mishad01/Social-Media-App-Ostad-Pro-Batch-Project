@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AddMusicView extends StatelessWidget {
-  const AddMusicView({super.key});
+class MusicView extends StatelessWidget {
+  const MusicView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,22 +13,16 @@ class AddMusicView extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.all(4.0),
           child: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_outlined, color: Colors.black),
-            onPressed: () {
-
-            },
+            icon:
+                const Icon(Icons.arrow_back_ios_outlined, color: Colors.black),
+            onPressed: () {},
           ),
         ),
         title: const Text(
           'Add music',
           style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-
-              color: Colors.black
-          ),
+              fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
         ),
-
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -95,25 +89,25 @@ class CustomSearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 40,
-        width: double.infinity,
-        child: TextFormField(
-            decoration: InputDecoration(
-              labelText: 'Search',
-              labelStyle: const TextStyle(color: Color(0xff98A2B3)),
-              enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-                borderSide: BorderSide(
-                  width: 1,
-                  color: Color(0xff6993FF),
-                ),
-              ),
-              prefixIcon: const Icon(
-                Icons.search,
-                color: Color(0xff475467),
-              ),
+      height: 40,
+      width: double.infinity,
+      child: TextFormField(
+        decoration: InputDecoration(
+          labelText: 'Search',
+          labelStyle: const TextStyle(color: Color(0xff98A2B3)),
+          enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(
+              width: 1,
+              color: Color(0xff6993FF),
             ),
-            ),
-        );
-    }
+          ),
+          prefixIcon: const Icon(
+            Icons.search,
+            color: Color(0xff475467),
+          ),
+        ),
+      ),
+    );
+  }
 }

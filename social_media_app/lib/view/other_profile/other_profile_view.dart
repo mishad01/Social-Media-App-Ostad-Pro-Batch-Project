@@ -1,35 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sizer/sizer.dart';
-import 'package:social_media_app/resources/assets_path.dart';
+import 'package:social_media_app/resources/export.dart';
 import 'package:social_media_app/view/other_profile/widgets/follow_and_message_button.dart';
 import 'package:social_media_app/view/other_profile/widgets/grid_view_items.dart';
 import 'package:social_media_app/view/other_profile/widgets/list_view_items.dart';
 import 'package:social_media_app/view/other_profile/widgets/rich_text_profile.dart';
+import 'package:social_media_app/view_model/other_profile/other_profile_controller.dart';
 
-class OtherProfileView extends StatefulWidget {
+class OtherProfileView extends StatelessWidget {
   const OtherProfileView({super.key});
 
   @override
-  State<OtherProfileView> createState() => _OtherProfileViewState();
-}
-
-class _OtherProfileViewState extends State<OtherProfileView> {
-  final List<String> imageSet = [
-    AssetsPath.ostadPromo1,
-    AssetsPath.ostadPromo2,
-    AssetsPath.ostadPromo3,
-    AssetsPath.image7,
-    AssetsPath.image8,
-    AssetsPath.image5,
-    AssetsPath.image4,
-    AssetsPath.ostadPromo4,
-    AssetsPath.ostadPromo5,
-    AssetsPath.ostadPromo6,
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    // Bind controller
+    final OtherProfileController controller = Get.put(OtherProfileController());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -44,22 +27,36 @@ class _OtherProfileViewState extends State<OtherProfileView> {
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: ListView(
-        children: [
-          const ProfileDetailsSection(),
-          SizedBox(height: 1.h),
-          ItemViewSection(imageSet: imageSet),
-        ],
+      body: GetBuilder<OtherProfileController>(
+        builder: (controller) {
+          if (controller.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return ListView(
+            children: [
+              ProfileDetailsSection(controller: controller),
+              SizedBox(height: 1.h),
+              ItemViewSection(imageSet: controller.profile.img),
+            ],
+          );
+        },
       ),
     );
   }
 }
 
 class ProfileDetailsSection extends StatelessWidget {
-  const ProfileDetailsSection({super.key});
+  final OtherProfileController controller;
+
+  const ProfileDetailsSection({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    final profile = controller.profile;
+
     return Container(
       height: 13.h,
       color: Colors.white,
@@ -67,19 +64,17 @@ class ProfileDetailsSection extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: 12.h,
-            width: 12.h,
+            height: 10.h,
+            width: 20.w,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              image: const DecorationImage(
-                image: NetworkImage(
-                    'https://randomuser.me/api/portraits/men/1.jpg'),
+              image: DecorationImage(
+                image: NetworkImage(profile.profilePictureUrl),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           SizedBox(width: 5.w),
-          // Profile Info
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,16 +82,16 @@ class ProfileDetailsSection extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    RichTextProfile(num: '59', text: 'Posts'),
-                    RichTextProfile(num: '125', text: 'Following'),
-                    RichTextProfile(num: '850', text: 'Followers'),
+                  children: [
+                    RichTextProfile(num: '${profile.posts}', text: 'Posts'),
+                    const RichTextProfile(num: '125', text: 'Following'),
+                    const RichTextProfile(num: '850', text: 'Followers'),
                   ],
                 ),
                 SizedBox(height: 1.h),
                 Text(
-                  'Visit: www.ostad.app',
-                  style: TextStyle(fontSize: 10.sp, color: Colors.black),
+                  profile.websiteUrl,
+                  style: TextStyle(fontSize: 15.sp, color: Colors.black),
                 ),
                 SizedBox(height: 1.h),
                 const FollowAndMessageButton(),
@@ -134,7 +129,7 @@ class ItemViewSection extends StatelessWidget {
                       SizedBox(width: 2.w),
                       Text("Grid View",
                           style:
-                              TextStyle(fontSize: 10.sp, color: Colors.black)),
+                              TextStyle(fontSize: 15.sp, color: Colors.black)),
                     ],
                   ),
                 ),
@@ -146,7 +141,7 @@ class ItemViewSection extends StatelessWidget {
                       SizedBox(width: 2.w),
                       Text("List View",
                           style:
-                              TextStyle(fontSize: 10.sp, color: Colors.black)),
+                              TextStyle(fontSize: 15.sp, color: Colors.black)),
                     ],
                   ),
                 ),

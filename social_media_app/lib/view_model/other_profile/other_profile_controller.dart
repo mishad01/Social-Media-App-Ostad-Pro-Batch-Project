@@ -1,45 +1,47 @@
 import 'package:get/get.dart';
-
-import 'other_profile_model.dart';
+import 'package:social_media_app/resources/assets_path.dart';
+import 'package:social_media_app/view_model/other_profile/other_profile_model.dart';
 
 class OtherProfileController extends GetxController {
-  OtherProfileModel profile = OtherProfileModel(
-    profilePictureUrl:
-    "https://st3.depositphotos.com/3776273/31836/i/450/depositphotos_318367382-stock-photo-portrait-of-a-handsome-young.jpg",
-    websiteUrl: "https://www.mferdos.com",
-
-    posts: 59,
-    followers: 850,
-    following: 125,
-  );
-
-
-  List<Map<String, dynamic>> gridPosts = [
-    {"imagePath": "assets/images/image_0.png", "caption": "Beautiful sunset", "mediaType": "image"},
-    {"imagePath": "assets/images/image_1.png", "caption": "Learning Flutter!", "mediaType": "image"},
-
+  final List<String> imageSet = [
+    AssetsPath.ostadPromo1,
+    AssetsPath.ostadPromo2,
+    AssetsPath.ostadPromo3,
+    AssetsPath.image7,
+    AssetsPath.image8,
+    AssetsPath.image5,
+    AssetsPath.image4,
+    AssetsPath.ostadPromo4,
+    AssetsPath.ostadPromo5,
+    AssetsPath.ostadPromo6,
   ];
+  // Instance of OtherProfileModel
+  late OtherProfileModel profile;
 
-  void updateProfile(OtherProfileModel newProfile) {
-    profile = newProfile;
-    update();
-  }
+  // Loading state
+  bool isLoading = false;
 
-  void addPost(String imagePath, String caption, String mediaType) {
-    gridPosts.add({"imagePath": imagePath, "caption": caption, "mediaType": mediaType});
-    update();
-  }
+  // Method to fetch profile data
+  void fetchProfileData() async {
+    isLoading = true;
+    await Future.delayed(Duration(seconds: 2));
 
-
-
-  void updateWebsite(String newWebsiteUrl) {
+    // Mocked data
     profile = OtherProfileModel(
-      profilePictureUrl: profile.profilePictureUrl,
-      websiteUrl: newWebsiteUrl,
-      posts: profile.posts,
-      followers: profile.followers,
-      following: profile.following,
+      "https://www.ostad.app",
+      userName: "John Doe",
+      profilePictureUrl: "https://randomuser.me/api/portraits/men/1.jpg",
+      posts: 59,
+      img: imageSet,
     );
+
+    isLoading = false;
     update();
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchProfileData(); // Load profile data on initialization
   }
 }

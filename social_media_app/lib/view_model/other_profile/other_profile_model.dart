@@ -1,15 +1,15 @@
 class OtherProfileModel {
+  final String userName;
   final String profilePictureUrl;
   final String websiteUrl;
   final int posts;
-  final int followers;
-  final int following;
+  final List<String> img;
 
-  OtherProfileModel({
+  OtherProfileModel(
+    this.websiteUrl, {
+    required this.userName,
     required this.profilePictureUrl,
-    required this.websiteUrl,
     required this.posts,
-    required this.followers,
-    required this.following,
+    required this.img,
   });
 }

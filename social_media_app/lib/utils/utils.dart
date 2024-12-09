@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:social_media_app/resources/assets_path.dart';
 
@@ -344,19 +347,33 @@ class Utils {
                     Text("Camera"),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      AssetsPath.galleryIcon,
-                      width: 88,
-                      height: 88,
-                    ),
-                    Text("Gallery"),
-                  ],
+                GestureDetector(
+                  onTap: () async {
+                    final ImagePicker picker = ImagePicker();
+                    final XFile? image = await picker.pickImage(
+                      source: ImageSource.gallery,
+                    );
+                    if (image != null) {
+                      Get.back(); // Close the dialog
+                      Get.to(() => AddPostScreen(imagePath: image.path));
+                    } else {
+                      print("No image selected.");
+                    }
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        AssetsPath.galleryIcon,
+                        width: 88,
+                        height: 88,
+                      ),
+                      Text("Gallery"),
+                    ],
+                  ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -444,6 +461,55 @@ class Utils {
             height: 30,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class AddPostScreen extends StatelessWidget {
+  final String imagePath;
+
+  AddPostScreen({required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Add Post"),
+      ),
+      body: Column(
+        children: [
+          // Display the selected image
+          Container(
+            height: 300,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: FileImage(File(imagePath)),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          // Add more options for the post
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Add a caption...",
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              // Add logic to post the image
+              print("Post submitted!");
+            },
+            child: Text("Post"),
+          ),
+        ],
       ),
     );
   }

@@ -1,122 +1,133 @@
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:social_media_app/resources/export.dart';
+
+import 'package:social_media_app/view/other_profile/widgets/grid_view_items.dart';
+import 'package:social_media_app/view/other_profile/widgets/list_view_items.dart';
+
 import 'package:social_media_app/view/profile/widgets/my_profile_details_section.dart';
+import 'package:social_media_app/view_model/profile/profile_controller.dart';
 
-class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+class ProfileView extends StatelessWidget {
+  final ProfileController controller = Get.put(ProfileController());
 
-  @override
-  State<ProfileView> createState() => _ProfileViewState();
-}
-
-class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2, // Number of tabs
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          elevation: 0.5,
-          title: const Text(
-            "My Profile",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          "My Profile",
+          style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.bold,
+              color: Colors.black),
         ),
-        body: Container(
-          color: Colors.white,
-          child: Column(
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
+      body: GetBuilder<ProfileController>(
+        builder: (controller) {
+          if (controller.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return ListView(
             children: [
-              // Profile Section
-              MyProfileDetailsSection(),
-              SizedBox(height: 0.8.h),
-              // Tabs Section
-              Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Colors.white, width: 1),
-                  ),
-                ),
-                child: TabBar(
-                  indicator: UnderlineTabIndicator(
-                    borderSide: BorderSide(
-                        width: 2.0, color: Colors.black.withOpacity(0.2)),
-                    insets: const EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  tabs: [
-                    Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset('assets/icons/grid.svg'),
-                          const SizedBox(width: 5),
-                          const Text("Grid view"),
-                        ],
-                      ),
-                    ),
-                    Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset('assets/icons/list.svg'),
-                          const SizedBox(width: 5),
-                          const Text("List view"),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              // TabBarView Section
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    // Grid View
-                    MasonryGridView.builder(
-                      padding: const EdgeInsets.all(8.0),
-                      gridDelegate:
-                          const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                      ),
-                      itemBuilder: (context, index) {
-                        String imagePath = AssetsPath.getImagePath(index);
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                            imagePath,
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      },
-                      itemCount: 10, // Adjust as per your assets
-                    ),
-                    // List View
-                    ListView.builder(
-                      padding: const EdgeInsets.all(8.0),
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        String imagePath = AssetsPath.getImagePath(index);
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                imagePath,
-                                fit: BoxFit.cover,
-                              ),
-                              const SizedBox(width: 10),
-                              Text("Image $index"),
-                            ],
-                          ),
-                        );
-                      },
-                    )
-                  ],
-                ),
-              ),
+              ProfileDetailsSection(controller: controller),
+              SizedBox(height: 1.h),
+              ItemViewSection(imageSet: controller.profile.img),
             ],
-          ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class ProfileDetailsSection extends StatelessWidget {
+  final ProfileController controller;
+
+  const ProfileDetailsSection({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      height: 13.h,
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
+      child: const Row(
+        children: [
+          MyProfileDetailsSection(),
+
+
+        ],
+      ),
+    );
+  }
+}
+
+class ItemViewSection extends StatelessWidget {
+  final List<String> imageSet;
+
+  const ItemViewSection({super.key, required this.imageSet});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      height: 70.h,
+      child: DefaultTabController(
+        length: 2, // Number of tabs
+        child: Column(
+          children: [
+            // TabBar
+            TabBar(
+              tabs: [
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(AssetsPath.gridIcon),
+                      SizedBox(width: 2.w),
+                      Text("Grid View",
+                          style:
+                          TextStyle(fontSize: 15.sp, color: Colors.black)),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(AssetsPath.listIcon),
+                      SizedBox(width: 2.w),
+                      Text("List View",
+                          style:
+                          TextStyle(fontSize: 15.sp, color: Colors.black)),
+                    ],
+                  ),
+                ),
+              ],
+              indicator: const UnderlineTabIndicator(
+                borderSide: BorderSide(width: 2.0, color: Colors.black),
+                insets: EdgeInsets.symmetric(horizontal: 30),
+              ),
+            ),
+            // TabBarView
+            Expanded(
+              child: TabBarView(
+                children: [
+                  GridViewItems(imageSet: imageSet),
+                  ListViewItems(imageSet: imageSet),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

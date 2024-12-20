@@ -1,5 +1,8 @@
 import 'package:social_media_app/resources/export.dart';
 import 'package:social_media_app/view/auth/login/widgets/custom_text_field.dart';
+import 'package:get/get.dart';
+
+import '../../../view_model/auth/sign_up_controller.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -11,7 +14,10 @@ class SignUpView extends StatefulWidget {
 class _SignUpViewState extends State<SignUpView> {
   final _emailTEController = TextEditingController();
   final _passwordTEController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
   final _formState = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,42 +86,57 @@ class _SignUpViewState extends State<SignUpView> {
                         suffixImg: null,
                         hintText: "Confirm Password",
                         hintTextDetails: "Confirm Password",
-                        controller: _passwordTEController,
+                        controller: _confirmPasswordController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
+                            return 'Please confirm your password';
                           }
                           if (value.length < 6) {
                             return 'Password must be at least 6 characters long';
+                          }
+                          if (value != _passwordTEController.text) {
+                            return 'Passwords do not match';
                           }
                           return null;
                         },
                       ),
                       SizedBox(height: 4.h),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formState.currentState!.validate()) {
-                            // Process valid data
-                            print("Email: ${_emailTEController.text}");
-                            print("Password: ${_passwordTEController.text}");
-                          }
+                      GetBuilder<SignUpController>(
+                        builder: (signUpController) {
+                          return Visibility(
+                            visible: !signUpController.signUpApiInProgress,
+                            replacement: const Center(child: CircularProgressIndicator()),
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formState.currentState!.validate()) {
+                                  bool isSuccess = await signUpController.signUp(
+                                    _emailTEController.text,
+                                    _passwordTEController.text,
+                                  );
+                                  if (!isSuccess) {
+                                    Get.snackbar('Sign Up Failed', 'Please try again later.');
+                                  }
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.themeColor,
+                                minimumSize: const Size.fromHeight(36),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                elevation: 2,
+                              ),
+                              child: const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          );
                         },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.themeColor,
-                          minimumSize: const Size.fromHeight(36),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          elevation: 2,
-                        ),
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -130,9 +151,9 @@ class _SignUpViewState extends State<SignUpView> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailTEController.dispose();
     _passwordTEController.dispose();
+    _confirmPasswordController.dispose();
   }
 }

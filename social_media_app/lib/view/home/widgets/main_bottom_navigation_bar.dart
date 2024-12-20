@@ -1,6 +1,6 @@
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:social_media_app/resources/export.dart';
-import 'package:social_media_app/view/home/home_view.dart';
+import 'package:social_media_app/view/other_profile/other_profile_view.dart';
 import 'package:social_media_app/view/profile/profile_view.dart';
 import 'package:social_media_app/view/search/search_view.dart';
 
@@ -15,7 +15,7 @@ class MainBottomNavigationBar extends StatefulWidget {
 class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
   int currentIndex = 0;
   final List<Widget> _pages = [
-    const HomeView(),
+    const OtherProfileView(),
     const SearchView(),
     Center(
       child: Text('Camera/Upload Screen'),

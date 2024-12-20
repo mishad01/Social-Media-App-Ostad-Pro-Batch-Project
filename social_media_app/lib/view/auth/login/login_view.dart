@@ -1,5 +1,7 @@
 import 'package:social_media_app/resources/export.dart';
 import 'package:social_media_app/view/auth/login/widgets/custom_text_field.dart';
+import 'package:social_media_app/view/home/widgets/main_bottom_navigation_bar.dart';
+import 'package:social_media_app/view_model/auth/login_controller.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -89,30 +91,69 @@ class _LoginViewState extends State<LoginView> {
                         ],
                       ),
                       SizedBox(height: 2.h),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formState.currentState!.validate()) {
-                            // Process valid data
-                            print("Email: ${_emailTEController.text}");
-                            print("Password: ${_passwordTEController.text}");
-                          }
+                      GetBuilder<LogInController>(
+                        builder: (logInController) {
+                          return Column(
+                            children: [
+                              Visibility(
+                                visible: !logInController.logInApiInProgress,
+                                replacement: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                                child: ElevatedButton(
+                                  onPressed: logInController.logInApiInProgress
+                                      ? null
+                                      : () async {
+                                          if (_formState.currentState!
+                                              .validate()) {
+                                            bool isSuccess =
+                                                await logInController.signIn(
+                                              _emailTEController.text,
+                                              _passwordTEController.text,
+                                            );
+                                            if (isSuccess) {
+                                              Get.offAll(
+                                                  MainBottomNavigationBar());
+                                            } else {
+                                              Get.snackbar(
+                                                'Error',
+                                                logInController.errorMessage,
+                                                backgroundColor: Colors.red,
+                                                colorText: Colors.white,
+                                              );
+                                            }
+                                          }
+                                        },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.themeColor,
+                                    minimumSize: const Size.fromHeight(36),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    elevation: 2,
+                                  ),
+                                  child: const Text(
+                                    'Log In',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              if (logInController.errorMessage.isNotEmpty)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Text(
+                                    logInController.errorMessage,
+                                    style: const TextStyle(
+                                        color: Colors.red, fontSize: 14),
+                                  ),
+                                ),
+                            ],
+                          );
                         },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.themeColor,
-                          minimumSize: const Size.fromHeight(36),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          elevation: 2,
-                        ),
-                        child: const Text(
-                          'Log In',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
                       ),
                     ],
                   ),
